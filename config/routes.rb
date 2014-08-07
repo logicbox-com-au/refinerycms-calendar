@@ -2,8 +2,9 @@ Refinery::Core::Engine.routes.append do
 
   # Frontend routes
   namespace :calendar do
-    get 'events/archive' => 'events#archive'
-    resources :events, :only => [:index, :show]
+    resources :events, :only => [:index, :show] do
+      get :archive, :on => :collection
+    end
   end
 
   # Admin routes
