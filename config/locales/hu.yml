@@ -9,8 +9,8 @@ hu:
       admin:
         shared:
           links:
-            manage_Események: Események kezelése
-            manage_Helyek: Helyek kezelése
+            manage_events: Események kezelése
+            manage_venues: Helyek kezelése
         venues:
           actions:
             create_new: Új hely hozzáadása
