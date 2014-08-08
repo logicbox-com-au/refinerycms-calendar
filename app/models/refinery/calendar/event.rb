@@ -31,6 +31,8 @@ module Refinery
         where("refinery_calendar_events.starts_at < ? AND refinery_calendar_events.ends_at > ?", day.tomorrow.beginning_of_day, day.beginning_of_day)
       }
 
+      scope :chronological,         order('refinery_calendar_events.starts_at ASC')
+      scope :reverse_chronological, order('refinery_calendar_events.starts_at DESC')
 
     end
   end
