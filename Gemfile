@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gemspec
 
-gem 'refinerycms', '~> 2.0.0'
+gem 'refinerycms', '~> 2.1.0'
 
 # Refinery/rails should pull in the proper versions of these
 group :assets do
@@ -14,23 +14,14 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'refinerycms-testing', '~> 2.0.0'
+  gem 'refinerycms-testing', '~> 2.1.0'
   gem 'factory_girl_rails'
   gem 'generator_spec'
 
   require 'rbconfig'
 
-  platforms :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter'
-    gem 'activerecord-jdbcmysql-adapter'
-    gem 'activerecord-jdbcpostgresql-adapter'
-    gem 'jruby-openssl'
-  end
-
   unless defined?(JRUBY_VERSION)
-    group :development, :test do
-  gem 'sqlite3'
-end
+    gem 'sqlite3'
     gem 'mysql2'
     gem 'pg'
   end
@@ -58,6 +49,11 @@ end
   end
 
   platforms :jruby do
+    gem 'activerecord-jdbcsqlite3-adapter'
+    gem 'activerecord-jdbcmysql-adapter'
+    gem 'activerecord-jdbcpostgresql-adapter'
+    gem 'jruby-openssl'
+
     unless ENV['TRAVIS']
       if RbConfig::CONFIG['target_os'] =~ /darwin/i
         gem 'growl',      '~> 1.0.3'
