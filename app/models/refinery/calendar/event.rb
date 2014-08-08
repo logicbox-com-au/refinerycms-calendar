@@ -34,6 +34,10 @@ module Refinery
       scope :chronological,         order('refinery_calendar_events.starts_at ASC')
       scope :reverse_chronological, order('refinery_calendar_events.starts_at DESC')
 
+      def multiday?
+        starts_at.to_date != ends_at.to_date
+      end
+
     end
   end
 end
