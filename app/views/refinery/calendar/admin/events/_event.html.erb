@@ -1,8 +1,18 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(event) -%>">
   <span class='title'>
     <%= event.title %>
-
   </span>
+
+  <% if Refinery::I18n.frontend_locales.many? %>
+    <span class='locales'>
+      <% event.translations.sort_by{|t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+        <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+                    refinery.edit_calendar_admin_event_path(event, :switch_locale => translation.locale),
+                    :class => 'locale' if translation.title.present? %>
+      <% end %>
+    </span>
+  <% end %>
+
   <span class='actions'>
 
     <%= link_to refinery_icon_tag("application_go.png"), refinery.calendar_event_path(event),

@@ -2,7 +2,7 @@
   <%= render '/refinery/admin/error_messages',
               :object => @event,
               :include_object_name => true %>
-
+  <%= render '/refinery/admin/locale_picker', :current_locale => Globalize.locale %>
 
   <div class='field'>
     <%= f.label :title -%>

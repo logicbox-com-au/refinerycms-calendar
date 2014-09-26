@@ -5,6 +5,12 @@ module Refinery
 
       friendly_id :title, :use => :slugged
 
+      translates :title, :excerpt, :description
+      class Translation
+        attr_accessible :locale
+      end
+      acts_as_indexed :fields => [:title, :excerpt, :description]
+
       belongs_to :venue
 
       validates :title, :presence => true, :uniqueness => true
