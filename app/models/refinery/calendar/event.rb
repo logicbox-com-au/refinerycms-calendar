@@ -28,7 +28,7 @@ module Refinery
                 :allow_nil => true
 
       scope :featured, where(:featured => true)
-      scope :upcoming, lambda { where('refinery_calendar_events.starts_at >= ?', Time.now) }
+      scope :future,   lambda { where('refinery_calendar_events.starts_at >= ?', Time.now) }
       scope :archive,  lambda { where('refinery_calendar_events.starts_at < ?',  Time.now) }
 
       scope :starting_on_day, lambda { |day| where(starts_at: day.beginning_of_day..day.tomorrow.beginning_of_day) }
@@ -39,6 +39,14 @@ module Refinery
 
       scope :chronological,         order('refinery_calendar_events.starts_at ASC')
       scope :reverse_chronological, order('refinery_calendar_events.starts_at DESC')
+
+      def self.upcoming(n=5)
+        future.chronological.limit(n)
+      end
+
+      def self.recent(n=5)
+        archive.reverse_chronological.limit(n)
+      end
 
       def multiday?
         starts_at.to_date != ends_at.to_date

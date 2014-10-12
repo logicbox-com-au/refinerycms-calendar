@@ -4,7 +4,7 @@ module Refinery
       before_filter :find_page, :except => :archive
 
       def index
-        @events = Event.upcoming.chronological
+        @events = Event.future.chronological
 
         # you can use meta fields from your model instead (e.g. browser_title)
         # by swapping @page for @event in the line below:
